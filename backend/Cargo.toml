@@ -1,0 +1,39 @@
+[package]
+name = "backend"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+shared = { path = "../shared" }
+
+# Web 框架
+axum = { version = "0.7", features = ["multipart"] }
+tokio = { version = "1", features = ["full"] }
+tower = "0.5"
+tower-http = { version = "0.6", features = ["cors", "fs", "trace"] }
+
+# 序列化 / 错误 / 日志
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+# 数据库 (MySQL / GoldenDB 复用 mysql 协议)
+sqlx = { version = "0.8", default-features = false, features = [
+    "runtime-tokio-rustls",
+    "mysql",
+    "macros",
+    "chrono",
+] }
+
+# 配置
+dotenvy = "0.15"
+
+# Excel 解析
+calamine = "0.26"
+
+# 运行时辅助
+chrono = { version = "0.4", features = ["serde"] }
+bytes = "1"
